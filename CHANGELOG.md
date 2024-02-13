@@ -1,3 +1,7 @@
+## [3.3.2] - Release
+
+- Add `surfaceTintColor` to country picker dialog to fix color.
+
 ## [3.3.1] - Release
 
 - Add `countryComparator` to sort countries list.
