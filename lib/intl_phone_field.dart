@@ -249,6 +249,9 @@ class IntlPhoneField extends StatefulWidget {
   /// If null, default magnification configuration will be used.
   final TextMagnifierConfiguration? magnifierConfiguration;
 
+  /// Function to sort countries
+  final int Function(Country, Country)? countryComparator;
+
   const IntlPhoneField({
     Key? key,
     this.formFieldKey,
@@ -296,6 +299,7 @@ class IntlPhoneField extends StatefulWidget {
     this.pickerDialogStyle,
     this.flagsButtonMargin = EdgeInsets.zero,
     this.magnifierConfiguration,
+    this.countryComparator,
   }) : super(key: key);
 
   @override
@@ -373,6 +377,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
             widget.onCountryChanged?.call(country);
             setState(() {});
           },
+          countryComparator: widget.countryComparator,
         ),
       ),
     );

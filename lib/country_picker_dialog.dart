@@ -46,6 +46,7 @@ class CountryPickerDialog extends StatefulWidget {
   final List<Country> filteredCountries;
   final PickerDialogStyle? style;
   final String languageCode;
+  final int Function(Country, Country)? countryComparator;
 
   const CountryPickerDialog({
     Key? key,
@@ -55,6 +56,7 @@ class CountryPickerDialog extends StatefulWidget {
     required this.onCountryChanged,
     required this.selectedCountry,
     required this.filteredCountries,
+    this.countryComparator,
     this.style,
   }) : super(key: key);
 
@@ -71,7 +73,8 @@ class _CountryPickerDialogState extends State<CountryPickerDialog> {
     _selectedCountry = widget.selectedCountry;
     _filteredCountries = widget.filteredCountries.toList()
       ..sort(
-        (a, b) => a.localizedName(widget.languageCode).compareTo(b.localizedName(widget.languageCode)),
+        widget.countryComparator ??
+            (a, b) => a.localizedName(widget.languageCode).compareTo(b.localizedName(widget.languageCode)),
       );
 
     super.initState();
@@ -106,7 +109,9 @@ class _CountryPickerDialogState extends State<CountryPickerDialog> {
                 onChanged: (value) {
                   _filteredCountries = widget.countryList.stringSearch(value)
                     ..sort(
-                      (a, b) => a.localizedName(widget.languageCode).compareTo(b.localizedName(widget.languageCode)),
+                      widget.countryComparator ??
+                          (a, b) =>
+                              a.localizedName(widget.languageCode).compareTo(b.localizedName(widget.languageCode)),
                     );
                   if (mounted) setState(() {});
                 },
