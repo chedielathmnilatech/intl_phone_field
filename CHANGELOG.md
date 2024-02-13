@@ -1,3 +1,7 @@
+## [3.3.1] - Release
+
+- Add `countryComparator` to sort countries list.
+
 ## [3.3.0] - Release
 
 - Add `magnifierConfiguration` to customize the magnifier.
